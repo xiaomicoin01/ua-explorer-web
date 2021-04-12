@@ -1,0 +1,140 @@
+<template>
+  <el-container direction="vertical">
+    <div class="con_item3">
+      <!-- explorar -->
+      <div class="border_box">
+        <div class="border_box_title">
+          <img src="@/assets/images/title.png" alt="" />
+          <span>adf</span>
+        </div>
+        <div class="border_box_content">
+          <div class="border_box_table">
+            <el-table
+              v-loading="utxoLoading"
+              element-loading-background = "#1b1f40"
+              stripe
+              :data="utxoData"
+              style="width: 100%"
+            >
+              <el-table-column label="IP" min-width="50%">
+                <template slot-scope="scope">
+                  <a
+                    :href="'https://ifblock.io/fch/tx/' + scope.row.txid"
+                    target="view_window"
+                    class="link"
+                    :title="scope.row.txid"
+                  >
+                    {{ scope.row.txid }}
+                  </a>
+                </template>
+              </el-table-column>
+              <el-table-column label="Public Key" min-width="12%">
+                <template slot-scope="scope">
+                  <div>
+                    {{ scope.row.n }}
+                  </div>
+                </template>
+              </el-table-column>
+              <el-table-column prop="amount" label="Duration(second)" min-width="19%">
+              </el-table-column>
+              <el-table-column prop="coinDay" label="Previous Date" min-width="19%">
+              </el-table-column>
+            </el-table>
+            <pager
+              @current-change="handleCurrentChangeExp"
+              @size-change="handleSizeChangeExp"
+              :page-size="pageSize"
+              :current-page="currentPage"
+              layout="total, prev, pager, next"
+              :total="count"
+              style="margin-top: 10px;text-align:right;"
+            ></pager>
+          </div>
+        </div>
+      </div>
+    </div>
+  </el-container>
+</template>
+<script>
+import pager from '@/components/pager.vue';
+export default {
+  name: 'node',
+  components: {
+    pager,
+  },
+  data() {
+    return {
+      utxoLoading: false,
+      pageSize: 10,
+      currentPage: 1,
+      address: '',
+      count: 20,
+      utxoData: [],
+    };
+  },
+  methods: {
+    Transactions() {
+      this.utxoLoading = true;
+      this.$ajax({
+        method: 'post',
+        data: {
+          pageNumber: this.currentPage,
+          pageSize: this.pageSize,
+          address: this.address,
+        },
+        url: '/api/v1/utxo/list',
+      }).then((response) => {
+        this.utxoLoading = false;
+        this.utxoData = response.data.data;
+        this.count = response.data.count;
+      });
+    },
+    handleCurrentChangeExp(pageNum) {
+      this.currentPage = pageNum;
+      this.Transactions();
+    },
+    handleSizeChangeExp(size) {
+      this.pageSize = size;
+      this.Transactions();
+    },
+  },
+  created: function () {
+    // this.Transactions()
+  },
+};
+</script>
+<style>
+.con_item3 {
+  width: 80%;
+  margin: 0 auto;
+  /* background-color: #fff; */
+  height: 100%;
+  padding-top: 20px;
+  overflow: hidden;
+}
+.border_box {
+  width: 100%;
+  border-radius: 10px;
+  overflow: hidden;
+  background-color: #22274d;
+  /* padding: 10px; */
+  margin-top: 20px;
+}
+.border_box_title {
+  width: 100%;
+  line-height: 51px;
+  height: 51px;
+  background: #2a2f55;
+  padding-left: 20px;
+  color: #fff;
+}
+.border_box_content {
+  width: 100%;
+  /* height: 45vh; */
+  background: #22274d;
+}
+.border_box_table {
+  width: 100%;
+  padding: 20px;
+}
+</style>
