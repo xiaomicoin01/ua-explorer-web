@@ -6,7 +6,7 @@
         <div class="border_box">
           <div class="border_box_title">
             <img src="@/assets/images/title.png" alt="" />
-            <span>{{ this.address }}</span>
+            <span>{{ this.addr }}</span>
           </div>
           <div class="border_box_content">
             <div class="border_box_table">
@@ -41,41 +41,33 @@
           <div class="border_box_content">
             <div class="border_box_table">
               <el-table
-                v-loading="utxoLoading"
+                v-loading="txLoading"
                 element-loading-background="#1b1f40"
                 stripe
                 :data="data"
                 style="width: 100%"
               >
-                <el-table-column
-                  label="Block Height"
-                  prop="blockHeight"
-                  min-width="10%"
-                ></el-table-column>
-                <el-table-column label="TX HASH" min-width="40%">
+                <el-table-column label="TX HASH" min-width="40%" align="center">
                   <template slot-scope="scope">
                     <el-button
                       type="text"
                       size="mini"
-                      @click="gotTx(scope.row.txId)"
+                      @click="gotoTx(scope.row.txId)"
                       >{{ scope.row.txId }}</el-button
                     >
                   </template>
                 </el-table-column>
                 <el-table-column
-                  label="Recipients"
-                  prop="recipients"
-                  min-width="10%"
-                ></el-table-column>
-                <el-table-column
                   label="Amount"
                   prop="amount"
                   min-width="10%"
+                  align="center"
                 ></el-table-column>
                 <el-table-column
                   label="Date"
                   prop="date"
                   min-width="15%"
+                  align="center"
                 ></el-table-column>
               </el-table>
               <pager
@@ -104,7 +96,7 @@ export default {
   data() {
     return {
       loading: false,
-      utxoLoading: false,
+      txLoading: false,
       pageSize: 10,
       currentPage: 1,
       count: 20,
@@ -121,13 +113,34 @@ export default {
         url: '/api/v1/address/' + this.addr
       }).then((response) => {
         this.loading = false
-        console.log(response)
-        this.info = response.data
+        this.info = response
       }).catch(e => {
         this.loading = false
         this.$message({
           type: 'warning',
-          message: '获取区块失败，请联系管理员'
+          message: '获取地址信息失败，请联系管理员'
+        })
+      })
+    },
+    getAddressTrans() {
+      this.txLoading = true;
+      this.$ajax({
+        method: 'post',
+        data: {
+          pageNumber: this.pageNum,
+          pageSize: this.pageSize,
+          address: this.addr
+        },
+        url: '/api/v1/address/transactions'
+      }).then((response) => {
+        this.txLoading = false
+        this.data = response.data
+        this.count = response.count
+      }).catch(e => {
+        this.txLoading = false
+        this.$message({
+          type: 'warning',
+          message: '获取地址交易失败，请联系管理员'
         })
       })
     },
@@ -145,6 +158,7 @@ export default {
   },
   created() {
     this.getAddress()
+    this.getAddressTrans()
   }
 }
 </script>
@@ -169,48 +183,5 @@ export default {
   font-family: Microsoft YaHei;
   font-weight: 400;
   color: #ffffff;
-}
-.con_item6 .border_box_table table {
-  display: block;
-  height: auto;
-  border-radius: 0;
-  background-color: transparent;
-}
-.con_item6 .border_box_table table thead {
-  display: inline-block;
-  width: 100%;
-}
-.con_item6 .border_box_table table td {
-  width: 7%;
-  text-align: center;
-}
-.con_item6 .border_box_table table thead tr {
-  display: table;
-  width: 100%;
-}
-.con_item6 .border_box_table table tbody {
-  display: inline-block;
-  width: 100%;
-  height: 59px;
-  border-radius: 10px;
-  background-color: #f0637d;
-}
-.con_item6 .border_box_table table tbody tr {
-  display: table;
-  width: 100%;
-  line-height: 59px;
-}
-.con_item6 .border_box_table table tbody tr td {
-  line-height: 59px;
-  font-size: 14px;
-  font-family: Microsoft YaHei;
-  font-weight: 400;
-  color: #ffffff;
-}
-.con_item6 .border_box_table_bottom table td {
-  width: calc(100% / 3);
-}
-.con_item6 .border_box_table_bottom table tbody {
-  background-color: #1b1f40;
 }
 </style>

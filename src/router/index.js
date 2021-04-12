@@ -7,9 +7,14 @@ import tx from '@/view/tx'
 import block from '@/view/block'
 import address from '@/view/address'
 
+const originalPush = Router.prototype.push
+Router.prototype.push = function push(location) {
+  return originalPush.call(this, location).catch(err => err)
+}
 Vue.use(Router)
 
 export default new Router({
+  mode: 'history',
   routes: [
     {
       path: '/',
