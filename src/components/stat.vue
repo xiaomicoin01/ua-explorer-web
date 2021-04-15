@@ -1,56 +1,99 @@
 <template>
-    <div class="con_item1">
-        <!-- logo  部分 -->
-        <ul>
-            <li class="top_back1" :style="{backgroundImage:'url('+require('@/assets/images/wangge_back.png')+')', backgroundRepeat: repeat}">
-                <!-- <div class="imgBox li_item">
-                    <img src="../images/wangge.png" alt="">
-                </div> -->
-                <div class="textBox li_item">
-                    <div>sdfasfsf</div>
-                    <div>sfsf</div>
-                </div>
-            </li>
-            <li class="top_back2" :style="{backgroundImage:'url('+require('@/assets/images/star_back.png')+')', backgroundRepeat: repeat}">
-                <!-- <div class="imgBox li_item">
-                    <img src="../images/star.png" alt="">
-                </div> -->
-                <div class="textBox li_item">
-                    <div>sdfasfsf</div>
-                    <div>sfsf</div>
-                </div>
-            </li>
-            <li class="li_logo">
-                <img src="@/assets/images/logo.png" alt="">
-            </li>
-            <li class="top_back3" :style="{backgroundImage:'url('+require('@/assets/images/all_back.png')+')', backgroundRepeat: repeat}">
-                <!-- <div class="imgBox li_item">
-                    <img src="../images/all.png" alt="">
-                </div> -->
-                <div class="textBox li_item">
-                    <div>sdfasfsf</div>
-                    <div>sfsf</div>
-                </div>
-            </li>
-            <li class="top_back4" :style="{backgroundImage:'url('+require('@/assets/images/jiedian_back.png')+')', backgroundRepeat: repeat}">
-                <!-- <div class="imgBox li_item">
-                    <img src="../images/jiedian.png" alt="">
-                </div> -->
-                <div class="textBox li_item">
-                    <div>sdfasfsf</div>
-                    <div>sfsf</div>
-                </div>
-            </li>
-        </ul>
-    </div>
+  <el-container class="con_item1">
+    <ul>
+      <li
+        class="top_back1"
+        :style="{
+          backgroundImage:
+            'url(' + require('@/assets/images/wangge_back.png') + ')',
+          backgroundRepeat: repeat,
+        }"
+      >
+        <div class="textBox li_item">
+          <div>NetWork(MH/s)</div>
+          <div>{{ info.netHash }}</div>
+        </div>
+      </li>
+      <li
+        class="top_back2"
+        :style="{
+          backgroundImage:
+            'url(' + require('@/assets/images/star_back.png') + ')',
+          backgroundRepeat: repeat,
+        }"
+      >
+        <div class="textBox li_item">
+          <div>Difficulty</div>
+          <div>{{ info.difficulty }}</div>
+        </div>
+      </li>
+      <li class="li_logo">
+        <img src="@/assets/images/logo.png" alt="" />
+      </li>
+      <li
+        class="top_back3"
+        :style="{
+          backgroundImage:
+            'url(' + require('@/assets/images/all_back.png') + ')',
+          backgroundRepeat: repeat,
+        }"
+      >
+        <div class="textBox li_item">
+          <div>UA Supply</div>
+          <div>{{ info.supply }}</div>
+        </div>
+      </li>
+      <li
+        class="top_back4"
+        :style="{
+          backgroundImage:
+            'url(' + require('@/assets/images/jiedian_back.png') + ')',
+          backgroundRepeat: repeat,
+        }"
+      >
+        <div class="textBox li_item">
+          <div>UA Tickey</div>
+          <div>{{ info.nodeCount }}</div>
+        </div>
+      </li>
+    </ul>
+  </el-container>
 </template>
 <script>
 export default {
   name: 'stat',
   data() {
     return {
-      repeat: 'no-repeat'
+      loading: false,
+      repeat: 'no-repeat',
+      info: {
+        netHash: '',
+        difficulty: 0,
+        nodeCount: '',
+        supply: ''
+      }
     }
+  },
+  methods: {
+    getInfo() {
+      this.loading = true;
+      this.$ajax({
+        method: 'get',
+        url: '/api/v1/stat/info'
+      }).then((response) => {
+        this.loading = false
+        this.info = response.data
+      }).catch(e => {
+        this.loading = false
+        this.$message({
+          type: 'warning',
+          message: '获取统计信息失败，请联系管理员'
+        })
+      })
+    },
+  },
+  created() {
+    this.getInfo()
   }
 }
 </script>
@@ -92,7 +135,7 @@ export default {
   line-height: 20px;
   color: #fff;
 }
-.con_item1 ul li .textBox div{
+.con_item1 ul li .textBox div {
   width: 100%;
   /* overflow: hidden; */
   /* text-overflow: ellipsis; */

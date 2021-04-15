@@ -15,34 +15,16 @@
                   <tr>
                     <td>No.</td>
                     <td>Address</td>
-                    <td>Blance(DAK)</td>
+                    <td>Blance(UA)</td>
                     <td>%</td>
                   </tr>
                 </thead>
                 <tbody>
-                  <tr>
-                    <td>1</td>
-                    <td>DZr4Rd1RL1BLza2BPamK2Hq8n8c8KWrRaM</td>
-                    <td>730417936.28648877</td>
-                    <td>10</td>
-                  </tr>
-                  <tr>
-                    <td>1</td>
-                    <td>DZr4Rd1RL1BLza2BPamK2Hq8n8c8KWrRaM</td>
-                    <td>730417936.28648877</td>
-                    <td>10</td>
-                  </tr>
-                  <tr>
-                    <td>1</td>
-                    <td>DZr4Rd1RL1BLza2BPamK2Hq8n8c8KWrRaM</td>
-                    <td>730417936.28648877</td>
-                    <td>10</td>
-                  </tr>
-                  <tr>
-                    <td>1</td>
-                    <td>DZr4Rd1RL1BLza2BPamK2Hq8n8c8KWrRaM</td>
-                    <td>730417936.28648877</td>
-                    <td>10</td>
+                  <tr v-for='(row, index) in addressInfo' :key='index'>
+                    <td>{{index+1}}</td>
+                    <td>{{row.address}}</td>
+                    <td>{{row.amount}}</td>
+                    <td>{{row.percentage}}</td>
                   </tr>
                 </tbody>
               </table>
@@ -68,44 +50,20 @@
                   </tr>
                 </thead>
                 <tbody>
-                  <tr>
+                  <tr v-for='(row, index) in addressStat.items' :key='index'>
                     <td>
                       <span class="fangColor"></span>
-                      <span>top 1-25</span>
+                      <span>{{row.name}}</span>
                     </td>
-                    <td>901342701.10000002</td>
-                    <td>98.99</td>
-                  </tr>
-                  <tr>
-                    <td>
-                      <span class="fangColor"></span>
-                      <span>top 1-25</span>
-                    </td>
-                    <td>901342701.10000002</td>
-                    <td>98.99</td>
-                  </tr>
-                  <tr>
-                    <td>
-                      <span class="fangColor"></span>
-                      <span>top 1-25</span>
-                    </td>
-                    <td>901342701.10000002</td>
-                    <td>98.99</td>
-                  </tr>
-                  <tr>
-                    <td>
-                      <span class="fangColor"></span>
-                      <span>top 1-25</span>
-                    </td>
-                    <td>901342701.10000002</td>
-                    <td>98.99</td>
+                    <td>{{row.amount}}</td>
+                    <td>{{row.value}}</td>
                   </tr>
                 </tbody>
               </table>
             </div>
             <div class="top_right_bottom">
               <div>total</div>
-              <div>88.99</div>
+              <div>{{addressStat.total}}</div>
             </div>
           </div>
         </div>
@@ -119,17 +77,29 @@
 <script>
 export default {
   name: 'top100',
+  data() {
+    return {
+      loading: false,
+      chartLoading: false,
+      addressInfo: [],
+      addressStat: {}
+    }
+  },
   mounted() {
-    this.createCharts()
+    this.getAddressInfo()
   },
   methods: {
     createCharts() {
+      var data = []
+      this.addressStat.items.forEach((elem, index) => {
+        data.push({name: elem.name, value: elem.value})
+      })
       let myChart = this.$echarts.init(document.getElementById('mycharts'))
       var option = {
         title: {
           show: false,
-          text: '某站点用户访问来源',
-          subtext: '纯属虚构',
+          text: '分布情况',
+          subtext: '前100名分布情况',
           left: 'center'
         },
         tooltip: {
@@ -152,19 +122,7 @@ export default {
               show: false
             }
           },
-          data: [{
-            value: 1048,
-            name: '搜索引擎'
-          },
-          {
-            value: 735,
-            name: '直接访问'
-          },
-          {
-            value: 580,
-            name: '邮件营销'
-          },
-          ],
+          data: data,
           emphasis: {
             show: false,
             itemStyle: {
@@ -180,6 +138,24 @@ export default {
         if (myChart && myChart.resize) {
           myChart.resize()
         }
+      })
+    },
+    getAddressInfo() {
+      this.loading = true;
+      this.$ajax({
+        method: 'get',
+        url: '/api/v1/top/info'
+      }).then((response) => {
+        this.loading = false
+        this.addressInfo = response.addressList
+        this.addressStat = response.topPercentage
+        this.createCharts()
+      }).catch(e => {
+        this.loading = false
+        this.$message({
+          type: 'warning',
+          message: '获取统计信息失败，请联系管理员'
+        })
       })
     }
   }

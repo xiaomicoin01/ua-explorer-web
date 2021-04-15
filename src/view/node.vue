@@ -5,7 +5,7 @@
       <div class="border_box">
         <div class="border_box_title">
           <img src="@/assets/images/title.png" alt="" />
-          <span>adf</span>
+          <span>Peer List</span>
         </div>
         <div class="border_box_content">
           <div class="border_box_table">
@@ -16,28 +16,10 @@
               :data="utxoData"
               style="width: 100%"
             >
-              <el-table-column label="IP" min-width="50%">
-                <template slot-scope="scope">
-                  <a
-                    :href="'https://ifblock.io/fch/tx/' + scope.row.txid"
-                    target="view_window"
-                    class="link"
-                    :title="scope.row.txid"
-                  >
-                    {{ scope.row.txid }}
-                  </a>
-                </template>
+              <el-table-column label="IP" min-width="30%" prop="addr"></el-table-column>
+              <el-table-column prop="conntime" label="Duration(second)" min-width="30%">
               </el-table-column>
-              <el-table-column label="Public Key" min-width="12%">
-                <template slot-scope="scope">
-                  <div>
-                    {{ scope.row.n }}
-                  </div>
-                </template>
-              </el-table-column>
-              <el-table-column prop="amount" label="Duration(second)" min-width="19%">
-              </el-table-column>
-              <el-table-column prop="coinDay" label="Previous Date" min-width="19%">
+              <el-table-column prop="subver" label="Version" min-width="30%">
               </el-table-column>
             </el-table>
             <pager
@@ -72,35 +54,35 @@ export default {
       utxoData: [],
     };
   },
+  created() {
+    this.getNodes()
+  },
   methods: {
-    Transactions() {
+    getNodes() {
       this.utxoLoading = true;
       this.$ajax({
         method: 'post',
         data: {
           pageNumber: this.currentPage,
-          pageSize: this.pageSize,
-          address: this.address,
+          pageSize: this.pageSize
         },
-        url: '/api/v1/utxo/list',
+        url: '/api/v1/peer/list',
       }).then((response) => {
+        console.log(response)
         this.utxoLoading = false;
-        this.utxoData = response.data.data;
-        this.count = response.data.count;
+        this.utxoData = response.data;
+        this.count = response.count;
       });
     },
     handleCurrentChangeExp(pageNum) {
       this.currentPage = pageNum;
-      this.Transactions();
+      this.getNodes();
     },
     handleSizeChangeExp(size) {
       this.pageSize = size;
-      this.Transactions();
+      this.getNodes();
     },
-  },
-  created: function () {
-    // this.Transactions()
-  },
+  }
 };
 </script>
 <style>
