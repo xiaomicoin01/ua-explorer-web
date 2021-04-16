@@ -1,4 +1,4 @@
-# explorer-vue
+# explorer-web
 
 > A Vue.js project
 
