@@ -94,27 +94,27 @@ export default {
 </script>
 <style>
 .page {
-  text-align: center;
-  color: #409eff;
+  text-align: center !important;
+  color: #409eff !important;
 }
 .el-pagination .el-select .el-input {
-    width: 100px;
-    margin: 0 5px;
-    background-color: rgb(34, 39, 77);
+    width: 100px !important;
+    margin: 0 5px !important;
+    background-color: rgb(34, 39, 77) !important;
 }
 .el-pagination.is-background .el-pager li {
-    background-color: rgb(34, 39, 77);
-    color: #FFF;
+    background-color: rgb(34, 39, 77) !important;
+    color: #FFF !important;
 }
 .el-pagination.is-background .el-pager li:not(.disabled).active {
-    background-color: #1b1f40;
-    color: #FFF;
+    background-color: #1b1f40 !important;
+    color: #FFF !important;
 }
 .el-pagination.is-background .btn-next, .el-pagination.is-background .btn-prev, .el-pagination.is-background .el-pager li {
-    margin: 0 5px;
-    background-color: rgb(34, 39, 77);
-    color: #606266;
-    min-width: 30px;
-    border-radius: 20px;
+    margin: 0 5px !important;
+    background-color: rgb(34, 39, 77) !important;
+    color: #606266 !important;
+    min-width: 30px !important;
+    border-radius: 20px !important;
 }
 </style>
