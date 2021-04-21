@@ -114,7 +114,7 @@ export default {
 
         },
         series: [{
-          name: '访问来源',
+          name: '分布情况',
           type: 'pie',
           radius: '80%',
           label: {
@@ -165,8 +165,6 @@ export default {
 .centnt_center {
   width: 80%;
   margin: 0 auto;
-  /* background-color: #fff; */
-  height: 100%;
   padding-top: 20px;
   overflow: hidden;
 }
@@ -200,10 +198,13 @@ export default {
 }
 .top_right_bottom {
   width: 100%;
+  height: 30px;
+  text-align: center;
+  line-height: 30px;
   display: flex;
   justify-content: space-between;
   padding: 0 60px;
-  font-size: 14px;
+  font-size: 16px;
   font-family: Microsoft YaHei;
   font-weight: 400;
   color: #ffffff;

@@ -36,7 +36,7 @@
         <div class="border_box">
           <div class="border_box_title">
             <img src="@/assets/images/title.png" alt="" />
-            <span>kasjfjsaf</span>
+            <span>Transactions</span>
           </div>
           <div class="border_box_content">
             <div class="border_box_table">

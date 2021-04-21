@@ -1,8 +1,8 @@
 <template>
 <div class="app-container">
   <el-footer class="footer">
-      COPYRIGHT © 2018. ALL RIGHTS RESERVED. DESIGNED BY
-      <a target="_blank" href="https://demo.org/" class="link">FreeCash</a>
+      COPYRIGHT © 2021. ALL RIGHTS RESERVED. DESIGNED BY
+      <a target="_blank" href="javascript:void(0)" class="link">UniversalAsset</a>
   </el-footer>
 </div>
 </template>
