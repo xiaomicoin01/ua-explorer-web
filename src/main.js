@@ -13,8 +13,9 @@ import * as echarts from 'echarts'
 import '@/assets/css/common.css'
 import '@/assets/css/table.css'
 
-import 'element-ui/lib/locale/lang/zh-CN'
-import 'element-ui/lib/locale/lang/en'
+import locale from 'element-ui/lib/locale'
+import elezh from 'element-ui/lib/locale/lang/zh-CN'
+import eleen from 'element-ui/lib/locale/lang/en'
 
 Vue.use(VueI18n)
 Vue.use(elementUI)
@@ -25,13 +26,18 @@ Vue.config.productionTip = false
 const i18n = new VueI18n({
   locale: 'zh-CN',
   messages: {
-    'zh-CN': require('@/assets/lang/zh'),
-    'en-US': require('@/assets/lang/en')
+    'zh-CN': {
+      ...require('@/assets/lang/zh'),
+      ...elezh
+    },
+    'en-US': {
+      ...require('@/assets/lang/en'),
+      ...eleen
+    }
   }
 })
-// Vue.use(elementUI, {
-//   i18n: (key, value) => i18n.t(key, value)
-// });
+
+locale.i18n((key, value) => i18n.t(key, value))
 
 Vue.prototype.changeView = function (url) {
   this.$router.push('/' + url);

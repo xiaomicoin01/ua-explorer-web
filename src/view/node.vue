@@ -5,7 +5,7 @@
       <div class="border_box">
         <div class="border_box_title">
           <img src="@/assets/images/title.png" alt="" />
-          <span>Peer List</span>
+          <span>{{$t('lang.peer.title')}}</span>
         </div>
         <div class="border_box_content">
           <div class="border_box_table">
@@ -16,10 +16,10 @@
               :data="utxoData"
               style="width: 100%"
             >
-              <el-table-column label="IP" min-width="30%" prop="addr"></el-table-column>
-              <el-table-column prop="conntime" label="Duration(second)" min-width="30%">
+              <el-table-column :label="this.$t('lang.peer.ip')" min-width="30%" prop="addr"></el-table-column>
+              <el-table-column prop="conntime" :label="this.$t('lang.peer.duration')" min-width="30%">
               </el-table-column>
-              <el-table-column prop="subver" label="Version" min-width="30%">
+              <el-table-column prop="subver" :label="this.$t('lang.peer.version')" min-width="30%">
               </el-table-column>
             </el-table>
             <pager

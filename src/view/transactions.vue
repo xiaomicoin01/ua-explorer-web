@@ -5,7 +5,7 @@
       <div class="border_box">
         <div class="border_box_title">
           <img src="@/assets/images/title.png" alt="" />
-          <span>Recently Transactions</span>
+          <span>{{$t('lang.recently.title')}}</span>
         </div>
         <div class="border_box_content">
           <div class="border_box_table">
@@ -16,15 +16,15 @@
               :data="txData"
               style="width: 100%"
             >
-              <el-table-column label="Block Height" prop='blockHeight' min-width="10%"></el-table-column>
-              <el-table-column label="TX HASH" min-width="40%">
+              <el-table-column :label="this.$t('lang.recently.blockHeight')" prop='blockHeight' min-width="10%"></el-table-column>
+              <el-table-column :label="this.$t('lang.recently.txHash')" min-width="40%">
                 <template slot-scope="scope">
                   <el-button type="text" size="mini" @click="gotTx(scope.row.txId)">{{scope.row.txId}}</el-button>
                 </template>
               </el-table-column>
-              <el-table-column label="Recipients" prop="recipients" min-width="10%"></el-table-column>
-              <el-table-column label="Amount" prop="amount" min-width="10%"></el-table-column>
-              <el-table-column label="Date" prop="date" min-width="15%"></el-table-column>
+              <el-table-column :label="this.$t('lang.recently.recipients')" prop="recipients" min-width="10%"></el-table-column>
+              <el-table-column :label="this.$t('lang.recently.amount')" prop="amount" min-width="10%"></el-table-column>
+              <el-table-column :label="this.$t('lang.recently.date')" prop="date" min-width="15%"></el-table-column>
             </el-table>
             <pager
               @current-change="handleCurrentChangeExp"

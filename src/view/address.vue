@@ -13,10 +13,10 @@
               <table>
                 <thead>
                   <tr>
-                    <td>Total Sent(UA)</td>
-                    <td>Total Received (UA)</td>
-                    <td>Balance(UA)</td>
-                    <td>Balance(UA Ticket)</td>
+                    <td>{{$t('lang.address.totalSend')}}</td>
+                    <td>{{$t('lang.address.totalRecv')}}</td>
+                    <td>{{$t('lang.address.balance')}}</td>
+                    <td>{{$t('lang.address.tickey')}}</td>
                   </tr>
                 </thead>
                 <tbody>
@@ -36,7 +36,7 @@
         <div class="border_box">
           <div class="border_box_title">
             <img src="@/assets/images/title.png" alt="" />
-            <span>Transactions</span>
+            <span>{{$t('lang.address.transaction')}}</span>
           </div>
           <div class="border_box_content">
             <div class="border_box_table">
@@ -47,7 +47,7 @@
                 :data="data"
                 style="width: 100%"
               >
-                <el-table-column label="TX HASH" min-width="40%" align="center">
+                <el-table-column :label="this.$t('lang.address.hash')" min-width="40%" align="center">
                   <template slot-scope="scope">
                     <el-button
                       type="text"
@@ -58,13 +58,13 @@
                   </template>
                 </el-table-column>
                 <el-table-column
-                  label="Amount"
+                  :label="this.$t('lang.address.amount')"
                   prop="amount"
                   min-width="10%"
                   align="center"
                 ></el-table-column>
                 <el-table-column
-                  label="Date"
+                  :label="this.$t('lang.address.date')"
                   prop="date"
                   min-width="15%"
                   align="center"

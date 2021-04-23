@@ -6,17 +6,17 @@
         <div class="border_box">
           <div class="border_box_title">
             <img src="@/assets/images/title.png" alt="" />
-            <span>Top 100-Current Balance</span>
+            <span>{{$t('lang.top100.title')}}</span>
           </div>
           <div class="border_box_content">
             <div class="border_box_table">
               <table>
                 <thead>
                   <tr>
-                    <td>No.</td>
-                    <td>Address</td>
-                    <td>Blance(UA)</td>
-                    <td>%</td>
+                    <td>{{$t('lang.top100.no')}}</td>
+                    <td>{{$t('lang.top100.address')}}</td>
+                    <td>{{$t('lang.top100.balance')}}</td>
+                    <td>{{$t('lang.top100.percent')}}</td>
                   </tr>
                 </thead>
                 <tbody>
@@ -37,16 +37,16 @@
         <div class="border_box">
           <div class="border_box_title">
             <img src="@/assets/images/title.png" alt="" />
-            <span>Top 100-Current Balance</span>
+            <span>{{$t('lang.top100.percentage')}}</span>
           </div>
           <div class="border_box_content">
             <div class="border_box_table">
               <table>
                 <thead>
                   <tr>
-                    <td></td>
-                    <td>Blance(DAK)</td>
-                    <td>%</td>
+                    <td>{{$t('lang.top100.distribution')}}</td>
+                    <td>{{$t('lang.top100.balance')}}</td>
+                    <td>{{$t('lang.top100.percent')}}</td>
                   </tr>
                 </thead>
                 <tbody>
@@ -62,7 +62,7 @@
               </table>
             </div>
             <div class="top_right_bottom">
-              <div>total</div>
+              <div>{{$t('lang.top100.total')}}</div>
               <div>{{addressStat.total}}</div>
             </div>
           </div>
@@ -98,8 +98,8 @@ export default {
       var option = {
         title: {
           show: false,
-          text: '分布情况',
-          subtext: '前100名分布情况',
+          text: this.$t('lang.top100.chartText'),
+          subtext: this.$t('lang.top100.chartSubText'),
           left: 'center'
         },
         tooltip: {
@@ -114,7 +114,7 @@ export default {
 
         },
         series: [{
-          name: '分布情况',
+          name: this.$t('lang.top100.chartText'),
           type: 'pie',
           radius: '80%',
           label: {

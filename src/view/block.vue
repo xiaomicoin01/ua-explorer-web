@@ -5,20 +5,20 @@
       <div class="border_box">
         <div class="border_box_title">
           <img src="@/assets/images/title.png" alt="" />
-          <span>HASH : {{$route.params.hash}}</span>
+          <span>{{$t('lang.block.title',{hash: $route.params.hash})}}</span>
         </div>
         <div class="border_box_content">
           <div class="border_box_table">
             <table>
               <thead>
                 <tr>
-                  <td>Height</td>
-                  <td>Difficulty</td>
-                  <td>Confirmation</td>
-                  <td>Size(kB)</td>
-                  <td>Bits</td>
-                  <td>Nonce</td>
-                  <td>Timestamp</td>
+                  <td>{{$t('lang.block.height')}}</td>
+                  <td>{{$t('lang.block.difficulty')}}</td>
+                  <td>{{$t('lang.block.confirm')}}</td>
+                  <td>{{$t('lang.block.size')}}</td>
+                  <td>{{$t('lang.block.bits')}}</td>
+                  <td>{{$t('lang.block.nonce')}}</td>
+                  <td>{{$t('lang.block.time')}}</td>
                 </tr>
               </thead>
               <tbody>
@@ -39,16 +39,16 @@
       <div class="border_box">
         <div class="border_box_title">
           <img src="@/assets/images/title.png" alt="" />
-          <span>Input Addresses</span>
+          <span>{{$t('lang.block.transaction')}}</span>
         </div>
         <div class="border_box_content">
           <div class="border_box_table border_box_table_bottom">
             <table>
               <thead>
                 <tr>
-                  <td>Hash</td>
-                  <td>Recipients</td>
-                  <td>Aount(DAK)</td>
+                  <td>{{$t('lang.block.hash')}}</td>
+                  <td>{{$t('lang.block.recipients')}}</td>
+                  <td>{{$t('lang.block.amount')}}</td>
                 </tr>
               </thead>
               <tbody>

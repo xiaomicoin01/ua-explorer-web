@@ -6,16 +6,16 @@
         <div class="border_box">
           <div class="border_box_title">
             <img src="@/assets/images/title.png" alt="" />
-            <span class="overText">txid : {{txid}}</span>
+            <span class="overText">{{$t('lang.tx.title',{'txid': this.txid})}}</span>
           </div>
           <div class="border_box_content">
             <div class="border_box_table">
               <table>
                 <thead>
                   <tr>
-                    <td>Cofnfirmation</td>
-                    <td>Block Hash</td>
-                    <td>Tinestamp</td>
+                    <td>{{$t('lang.tx.confirm')}}</td>
+                    <td>{{$t('lang.tx.blockHash')}}</td>
+                    <td>{{$t('lang.tx.time')}}</td>
                   </tr>
                 </thead>
                 <tbody>
@@ -35,19 +35,19 @@
           <div class="border_box">
             <div class="border_box_title">
               <img src="@/assets/images/title.png" alt="" />
-              <span>Input Addresses</span>
+              <span>{{$t('lang.tx.input')}}</span>
             </div>
             <div class="border_box_content">
               <div class="border_box_table">
                 <div class="con_item5_address_btn" v-if="tx.inputs.length == 0">
-                  <a href="javascript:void(0)">New coins</a>
+                  <a href="javascript:void(0)">{{$t('lang.tx.newCoin')}}</a>
                 </div>
                 <div class="border_box_table" v-if="tx.inputs.length > 0">
                     <table class="tablelast">
                         <thead>
                             <tr>
-                                <td>Addrsee</td>
-                                <td>Amount</td>
+                              <td>{{$t('lang.tx.address')}}</td>
+                              <td>{{$t('lang.tx.amount')}}</td>
                             </tr>
                         </thead>
                         <tbody>
@@ -66,15 +66,15 @@
           <div class="border_box">
             <div class="border_box_title">
               <img src="@/assets/images/title.png" alt="" />
-              <span>Recipinets</span>
+              <span>{{$t('lang.tx.output')}}</span>
             </div>
             <div class="border_box_content">
               <div class="border_box_table">
                 <table class="tablelast">
                   <thead>
                     <tr>
-                      <td>Addrsee</td>
-                      <td>Amount</td>
+                      <td>{{$t('lang.tx.address')}}</td>
+                      <td>{{$t('lang.tx.amount')}}</td>
                     </tr>
                   </thead>
                   <tbody>
