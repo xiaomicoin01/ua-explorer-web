@@ -27,21 +27,12 @@
 </template>
 <script>
 import lang from '@/components/lang'
+import {language} from '@/assets/lang'
 export default {
   name: 'nva',
   data() {
     return {
-      lang: [{
-        code: 'en-US',
-        name: '英文',
-        icon: require('@/assets/images/lang/en.png'),
-        default: false
-      }, {
-        code: 'zh-CN',
-        name: '中文',
-        icon: require('@/assets/images/lang/zh.png'),
-        default: true
-      }]
+      lang: language
     }
   },
   components: {
