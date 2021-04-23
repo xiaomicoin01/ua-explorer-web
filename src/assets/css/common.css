@@ -22,38 +22,16 @@ background: #22274d;
 .border_box_content_select {
 padding: 10px;
 }
-.border_box_content_select label {
-width: 300px;
-color: #ffffff;
-font-size: 16px;
-font-family: Microsoft YaHei;
-font-weight: 400;
-}
+
 .border_box_content {
     width: 100%;
     /* height: 45vh; */
     background: #22274d;
   }
   .border_box_content_select {
-    padding: 10px;
+    padding-right: 10%;
   }
-  .border_box_content_select label {
-    width: 300px;
-    color: #ffffff;
-    font-size: 16px;
-    font-family: Microsoft YaHei;
-    font-weight: 400;
-  }
-  .border_box_content_select .form-control {
-    display: inline-block;
-    width: 83px;
-    height: 28px;
-    line-height: 28px;
-    margin: 0 10px;
-    background-color: #1b1f40;
-    color: #ffffff;
-    border-color: #1b1f40;
-  }
+
   .border_box_table {
     width: 100%;
     padding: 20px;

@@ -10,7 +10,7 @@
         }"
       >
         <div class="textBox li_item">
-          <div>NetWork(MH/s)</div>
+          <div>{{$t('lang.stat.network')}}</div>
           <div>{{ info.netHash }}</div>
         </div>
       </li>
@@ -23,7 +23,7 @@
         }"
       >
         <div class="textBox li_item">
-          <div>Difficulty</div>
+          <div>{{$t('lang.stat.difficulty')}}</div>
           <div>{{ info.difficulty }}</div>
         </div>
       </li>
@@ -39,7 +39,7 @@
         }"
       >
         <div class="textBox li_item">
-          <div>UA Supply</div>
+          <div>{{$t('lang.stat.supply')}}</div>
           <div>{{ info.supply }}</div>
         </div>
       </li>
@@ -52,7 +52,7 @@
         }"
       >
         <div class="textBox li_item">
-          <div>UA Tickey</div>
+          <div>{{$t('lang.stat.tickey')}}</div>
           <div>{{ info.nodeCount }}</div>
         </div>
       </li>

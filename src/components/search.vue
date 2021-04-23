@@ -5,12 +5,12 @@
       v-model="content"
       type="text"
       class="searchInput form-control"
-      placeholder="please input txid,address,block hash,block height"
+      :placeholder="this.$t('lang.search.info')"
       aria-describedby="basic-addon1"
     />
     <button type="submit" class="searchButton btn btn-success" @click="search">
       <img src="@/assets/images/search.png" alt="" />
-      <span>search</span>
+      <span v-text="$t('lang.search.button')"></span>
     </button>
   </div>
 </template>

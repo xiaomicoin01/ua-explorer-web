@@ -4,29 +4,48 @@
         <li class="nav_back1" @click="change('transactions')">
           <a href="javascript:void(0);">
             <img src="@/assets/images/explorer.png" alt="" />
-            <span>Explorer</span></a
+            <span>{{$t('lang.nva.explorer')}}</span></a
           >
         </li>
         <li class="" @click="change('top100')">
           <a href="javascript:void(0);">
             <img src="@/assets/images/rank.png" alt="" />
-            <span>Top 100</span>
+            <span>{{$t('lang.nva.top100')}}</span>
           </a>
         </li>
         <li class="" @click="change('node')">
           <a href="javascript:void(0);">
             <img src="@/assets/images/node.png" alt="" />
-            <span>Node</span></a
+            <span>{{$t('lang.nva.node')}}</span></a
           >
         </li>
       </ul>
+      <div class="border_box_content_select lang">
+         <lang :list="lang"></lang>
+      </div>
   </el-container>
 </template>
 <script>
+import lang from '@/components/lang'
 export default {
   name: 'nva',
   data() {
-    return {}
+    return {
+      lang: [{
+        code: 'en-US',
+        name: '英文',
+        icon: require('@/assets/images/lang/en.png'),
+        default: false
+      }, {
+        code: 'zh-CN',
+        name: '中文',
+        icon: require('@/assets/images/lang/zh.png'),
+        default: true
+      }]
+    }
+  },
+  components: {
+    lang
   },
   methods: {
     change(url) {
@@ -81,5 +100,9 @@ export default {
   border-color: transparent;
   background: linear-gradient(90deg, #f14b97 0%, #3c3cec 100%);
   border: none;
+}
+.lang {
+  position: absolute;
+  right: 1%;
 }
 </style>
